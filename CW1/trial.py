@@ -35,8 +35,9 @@ def choice():
         x = v.get()
         if x == 1:
             encryption()
-        elif x == 2:
+        else:  
             decryption()
+
             
 def error_handler():
     error_message = "Input Field Empty"
@@ -72,20 +73,16 @@ def decryption():
     log_event(f"{cipher_text},Decrypted")
     plain_text = ""
     key = 5
-    try:
-        cipher_text = base64.b64decode(cipher_text.encode()).decode()
-    except base64.binascii.Error:
-        label4 = tk.Label(root, text="Invalid Input", width=20, bg="light yellow", font=bold_font)
-        canvas.create_window(200, 350, window=label4)
-        user_text.delete(0, 'end')
-        return
-
+    cipher_text = base64.b64decode(cipher_text.encode()).decode()
     for i in range(len(cipher_text)):
         letter = cipher_text[i]
-        char_code = ord(letter)
-        if char_code in range(32, 127):
-            if char_code - key < 32:
-                plain_text += chr(char_code - key + 95)
+        if letter.isdigit():
+            char_code = int(letter)
+            plain_text += str((char_code - key) % 10)
+        elif letter.isalpha():
+            char_code = ord(letter)
+            if char_code - key < ord('a'):
+                plain_text += chr(char_code - key + 26)
             else:
                 plain_text += chr(char_code - key)
         else:
@@ -93,7 +90,6 @@ def decryption():
     label4 = tk.Label(root, text=plain_text, width=20, bg="light yellow", font=bold_font)
     canvas.create_window(200, 350, window=label4)
     user_text.delete(0, 'end')
-
 
   
 
