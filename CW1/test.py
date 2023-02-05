@@ -1,5 +1,6 @@
 import unittest
 import base64
+import main
 
 class TestEncryptDecrypt(unittest.TestCase):
     def test_encryption(self):
