@@ -9,7 +9,7 @@ root.title("Ceaser Encryptor-Decryptor")
 root.geometry("400x500")
 root.resizable(width=False, height=False)
 
-canvas = tk.Canvas(root, height=500, width=400, bg="MediumPurple1")
+canvas = tk.Canvas(root, height=500, width=400, bg="PeachPuff2")
 canvas.pack()
 
 bold_font = tkfont.Font(family="Helvetica", size=12, weight="bold")
