@@ -3,9 +3,9 @@ import tkinter.font as tkfont
 from getpass import getpass
 import datetime
 import base64
-
+#----------GUI-------------------------------------
 root = tk.Tk()
-root.title("Ceaser Encryptor-Decryptor")
+root.title("Bipaswi's Text Encryptor-Decryptor")
 root.geometry("400x500")
 root.resizable(width=False, height=False)
 
@@ -27,7 +27,6 @@ v = tk.IntVar()
 def log_event(event):
     with open("log.csv", "a") as f:
         f.write(f"{datetime.datetime.now()},{event}\n")
-
 def choice():
     if not user_text.get():
         error_handler()
@@ -37,12 +36,12 @@ def choice():
             encryption()
         elif x == 2:
             decryption()
-            
+  # ------------------error handling---------------         
 def error_handler():
     error_message = "Input Field Empty"
     label = tk.Label(root, text=error_message, width=20, bg="light yellow", font=bold_font)
     canvas.create_window(200, 350, window=label)
-    
+ #------------encryption-----------------   
 def encryption():
     plain_text = user_text.get()
     log_event(f"{plain_text},Encrypted")
@@ -65,8 +64,7 @@ def encryption():
     label3 = tk.Label(root, text=cipher_text, width=20, bg="light yellow", font=bold_font)
     canvas.create_window(200, 350, window=label3)
     user_text.delete(0, 'end')
-
-
+#----------------------decryption------------------
 def decryption():
     cipher_text = user_text.get()
     log_event(f"{cipher_text},Decrypted")
@@ -79,7 +77,6 @@ def decryption():
         canvas.create_window(200, 350, window=label4)
         user_text.delete(0, 'end')
         return
-
     for i in range(len(cipher_text)):
         letter = cipher_text[i]
         char_code = ord(letter)
@@ -94,9 +91,6 @@ def decryption():
     canvas.create_window(200, 350, window=label4)
     user_text.delete(0, 'end')
 
-
-  
-
 def show_value(value):
     new_window = tk.Toplevel(root)
     new_window.title("Input Value")
@@ -104,12 +98,8 @@ def show_value(value):
     label = tk.Label(new_window, text=value, width=20, bg="light yellow", font=bold_font)
     label.pack()
 
-
-
-
 encrypt_radio = tk.Radiobutton(root, text="Encrypt", variable=v, value=1, command=choice, bg="MediumPurple1")
 canvas.create_window(100, 250, window=encrypt_radio)
-
 
 decrypt_radio = tk.Radiobutton(root, text="Decrypt", variable=v, value=2, command=choice, bg="MediumPurple1")
 canvas.create_window(300, 250, window=decrypt_radio)
@@ -119,11 +109,6 @@ canvas.create_window(300, 150, window=view_button)
 
 run_button = tk.Button(root, text="Run", bg="light green", command=choice)
 canvas.create_window(200, 300, window=run_button)
-
-
-
-...
-
 
 root.mainloop()
 
